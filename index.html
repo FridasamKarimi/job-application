@@ -10,6 +10,13 @@
         <div id="flashpage" class="flashpage">
             <h1>Get your Job Now</h1>
         </div>
+        <header>
+            <nav class="nav-menu">
+                <a href="#Application">Apply</a>
+                <a href="#survey">Survey</a>
+                <a href="#payment">Make Payment</a>
+            </nav>
+        </header>
 
         <!--login form-->
         <div class="Login" class="container hidden">
@@ -64,7 +71,83 @@
            <div  class="terms">
             <input type="checkbox" id="terms&conditions" class="terms-conditions" required>
             <label for="terms">I agree with terms and conditions</label>
-           </div>
-        
+           </div>  
+
+        </div>
+        <div class="survey" class="container">
+            <h2>Applicant survey Form</h2>
+            <form class="surveyForm">
+                <div class="formgroup">
+                    <label for="Name">Full Name</label>
+                    <input type="text" class="surveyname" placeholder="Enter your Fullname">
+                </div>
+                <div class="formgroup">
+                    <label for="role">What type of role were you interested in?*</label>
+                    <div class="radiogroup">
+                        <label><input type="radio"  name="rolePreference" value="Full-time" required>Full-time
+                        </label>
+                        <label ><input type="radio" name="rolePreference" value="Part-time" required>
+                        Part-time</label>
+                        <label>
+                            <input type="radio" name="rolePreference" value="Contract" required>Contract
+                        </label>
+                    </div>
+                    <div class="formgroup">
+                        <label for="industry">Which industry would you prefer to work in?*</label>
+                        <select id="industry" name="industry" required>
+                            <option value="">Select an option</option>
+                            <option value="technology">Technology</option>
+                            <option value="healthcare">Healthcare</option>
+                            <option value="market">Market</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Education">Education</option>
+                            <option value="Agriculture">Agriculture</option>
+                            <option value="other">Other</option>
+
+                        </select>
+                        
+                    </div>
+                    <div class="formgroup">
+                        <label for="experience">What is your experience level?*</label>
+                        <div class="radiogroup">
+                            <label >
+                                <input type="radio" name="experiencelevel" value="Entrylevel" required>Entry-leve(0-2years)
+                            </label>
+                            <label>
+                                <input type="radio" name="experiencelevel" value="Junior-level" required>Junior-level(3-5years)
+                            </label>
+                            <label >
+                                <input type="radio" name="experiencelevel" value="Senior-level" required>Senior-level(5years+..)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="formgroup">
+                        <label for="topSkill">Which is your Strongest skill? *</label>
+                        <input type="text" id="topSkill" class="topSkill" placeholder="eg Python...">
+                    </div>
+                    <div class="formgroup">
+                        <label> What motivates you most in a job?(Select all that apply)</label>
+                        <div class="checkbox-group">
+                            <label> 
+                                <input type="checkbox" value="Salary" >Salary
+                            </label>
+                            <label>
+                                <input type="checkbox" value="WorkLife Balance">Worklife Balance
+                            </label>
+                            <label>
+                                <input type="checkbox" value="Career Growth">Career Growth
+                            </label>
+                            <label>
+                                <input type="checkbox" value="Company Culture">Company Culture
+                            </label>
+                            <label>
+                                <input type="checkbox" value="Social impact">Social Impact
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
     </body>
 </html>
