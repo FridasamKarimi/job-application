@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>Jop Appliction</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div id="flashpage" class="flashpage">
+            <h1>Get your Job Now</h1>
+        </div>
+
+        <!--login form-->
+        <div class="Login" class="container hidden">
+            <h2>Welcome Back!</h2>
+            <div id="login-error" class="error"></div>
+            <form id="LoginForm" class="login-form">
+                <label for="email">Email</label>
+                <input type="email" id="Login-Email" class="loginemail" placeholder="Enter email">
+                <label for="password">Password</label>
+                <input type="password" id="Login-Password" class="loginpassword" placeholder="Enter password">
+                
+            </form>
+
+        </div>
+
+        <div class="Sign-up" class="container hidden">
+            <h2>Create an Account!</h2>
+            <div id="signup-error" class="error"></div>
+            <form id="SignupForm" class="signup-form">
+                <label for="signup-email">Email</label>
+                <input type="email" id="Signup-email" class="signup-email" placeholder="Enter email">
+                <label for="signup-password">Password</label>
+                <input type="password" id="signup-Password" class="signuppassword" placeholder="Enter password">
+                <label for="confirmpassword">Confirm Password</label>
+                <input type="password" id="confirm-Password" class="confirmpassword" placeholder="Confirm password">
+
+
+            </form>
+
+        </div>
+
+        <div class="JobApplication" class="container hidden">
+            <h2>Apply! Apply!</h2>
+            <div id="Application-error" class="error"></div>
+            <diV id="application-success" class="success"></diV>
+            <div class="fullname">
+                <label for="fullname">Enter your fullname</label>
+                <input type="text" class="Full-name" required>
+            </div>
+            <div class="region">
+                <label for="region">Enter your region</label>
+                <input type="text" class="regionname" required> 
+            </div>
+           <div class="dateofbirth">
+            <label for="dateofbirth">Enter your date of birth</label>
+            <input type="date" class="Birthdate" required>
+           </div>
+           <div class="resume">
+            <label for="resume">Attach your Resume/CV</label>
+            <input type="search" class="resume-cv">
+           </div>
+           <div  class="terms">
+            <input type="checkbox" id="terms&conditions" class="terms-conditions" required>
+            <label for="terms">I agree with terms and conditions</label>
+           </div>
+        
+    </body>
+</html>
