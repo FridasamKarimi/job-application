@@ -1,8 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <title>Jop Appliction</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Reservation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Interview Reservation Form</h1>
+        <p>Book your interview slot for your job application.</p>
+        <div id="reservation-error" class="error hidden"></div>
+        <div id="reservation-success" class="success hidden"></div>
+        <form id="reservationForm">
+            <div class="form-group">
+                <h2>Applicant Details</h2>
+                <div class="form-group">
+                    <label for="fullName">Full Name *</label>
+                    <input type="text" id="fullName" name="fullName" required placeholder="John Kamau">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required placeholder="example@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number (e.g., +2547XXXXXXXX) *</label>
+                    <input type="tel" id="phone" name="phone" required pattern="\+2547[0-9]{8}" placeholder="+2547XXXXXXXX">
+                </div>
+            </div>
+            <div class="form-group">
+                <h2>Interview Preferences</h2>
+                <div class="form-group">
+                    <label for="interviewDate">Preferred Interview Date *</label>
+                    <input type="date" id="interviewDate" name="interviewDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="interviewTime">Preferred Interview Time *</label>
+                    <input type="time" id="interviewTime" name="interviewTime" required>
+                </div>
+                <div class="form-group">
+                    <label for="interviewMode">Interview Mode *</label>
+                    <select id="interviewMode" name="interviewMode" required>
+                        <option value="">Select an option</option>
+                        <option value="In-Person-Nairobi">In-Person (Nairobi)</option>
+                        <option value="In-Person-Mombasa">In-Person (Mombasa)</option>
+                        <option value="Virtual">Virtual (Zoom/Google Meet)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Additional Comments (Optional)</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Any specific requests or information (e.g., preferred interviewer, accessibility needs)"></textarea>
+                </div>
+            </div>
+            <button type="submit">Reserve Interview Slot</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

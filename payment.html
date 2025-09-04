@@ -1,8 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <title>Jop Appliction</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="payment container">
+        <h2>Payment Preference Form</h2>
+        <p>Please provide your details or preferred payment method</p>
+        <form id="paymentPreference">
+            <div class="form-group">
+                <h3>Applicant Details</h3>
+            </div>
+            <div class="form-group">
+                <label for="paymentName">Full Name *</label>
+                <input type="text" id="paymentName" name="paymentName" class="paymentName" required>
+            </div>
+            <div class="form-group">
+                <label for="paymentNumber">Phone Number *</label>
+                <input type="tel" id="paymentNumber" name="paymentNumber" class="paymentNumber" required>
+            </div>
+            <div class="form-group">
+                <p><strong>Preferred Payment Method</strong></p>
+                <label>
+                    <input type="radio" name="paymentMethod" value="M-Pesa" required onclick="togglePaymentFields('mpesa')">
+                    M-Pesa
+                </label>
+                <label>
+                    <input type="radio" name="paymentMethod" value="Bank Account" onclick="togglePaymentFields('bank')">
+                    Bank Account
+                </label>
+            </div>
+            <!-- M-Pesa Details -->
+            <div id="mpesaFields" class="form-group hidden">
+                <div class="form-group">
+                    <label for="mpesaNumber">M-Pesa Registered Phone Number *</label>
+                    <input type="tel" id="mpesaNumber" name="mpesaNumber" required>
+                </div>
+                <div class="form-group">
+                    <label for="mpesaName">M-Pesa Registered Name *</label>
+                    <input type="text" id="mpesaName" name="mpesaName" required>
+                </div>
+            </div>
+            <!-- Bank Account Details -->
+            <div id="bankFields" class="form-group hidden">
+                <div class="form-group">
+                    <label for="bankName">Bank Name *</label>
+                    <select id="bankName" name="bankName" required>
+                        <option value="">Select a bank</option>
+                        <option value="KCB Bank">KCB Bank</option>
+                        <option value="Equity Bank">Equity Bank</option>
+                        <option value="Co-operative Bank">Co-operative Bank</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="accountNumber">Bank Account Number *</label>
+                    <input type="text" id="accountNumber" name="accountNumber" required>
+                </div>
+                <div class="form-group">
+                    <label for="accountName">Account Holder Name *</label>
+                    <input type="text" id="accountName" name="accountName" required>
+                </div>
+                <div class="form-group">
+                    <label for="branchName">Branch Name</label>
+                    <input type="text" id="branchName" name="branchName">
+                </div>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

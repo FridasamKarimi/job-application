@@ -1,0 +1,281 @@
+/* Reset and global styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+/* Body styles */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #FF7A00; /* Orange background */
+}
+
+/* Flash page styles (for index.html) */
+.flashpage {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #2B2B2B;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 1s ease;
+}
+
+.flashpage h1 {
+    color: #B3D4FF;
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+.flashpage.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Container styles */
+.container {
+    background: #2B2B2B;
+    border-radius: 8px;
+    max-width: 600px;
+    padding: 30px;
+    margin: 50px auto;
+    box-sizing: border-box;
+}
+
+/* Heading styles */
+h1, h2, h3 {
+    text-align: center;
+    color: #B3D4FF;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 1.8rem;
+}
+
+h3 {
+    font-size: 1.4rem;
+}
+
+/* Navigation menu styles (for index.html) */
+.nav-menu {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.nav-link {
+    color: #B3D4FF;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+.nav-link:hover {
+    background: #3A3A3A;
+}
+
+/* Main content styles (for index.html) */
+.intro {
+    color: #B3D4FF;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+/* Error and success message styles */
+.error, .success {
+    min-height: 20px;
+    margin-bottom: 15px;
+    text-align: center;
+    display: none;
+}
+
+.error {
+    color: #FF4C4C;
+}
+
+.success {
+    color: #28a745;
+}
+
+/* Form group styles */
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+/* Form styles (for signup, job application, reservation, survey, payment) */
+.signup-form, #jobApplicationForm, #reservationForm, #surveyForm, #paymentPreference {
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-form label, #jobApplicationForm label, #reservationForm label, #surveyForm label, #paymentPreference label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #B3D4FF;
+    font-size: 1.1rem;
+}
+
+.signup-form input, #jobApplicationForm input[type="text"], #jobApplicationForm input[type="date"], #reservationForm input[type="text"], #reservationForm input[type="email"], #reservationForm input[type="tel"], #reservationForm input[type="date"], #reservationForm input[type="time"], #reservationForm select, #surveyForm input[type="text"], #surveyForm select, #paymentPreference input[type="text"], #paymentPreference input[type="tel"], #paymentPreference select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #3A3A3A;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.signup-form input:focus, #jobApplicationForm input:focus, #reservationForm input:focus, #reservationForm select:focus, #surveyForm input:focus, #surveyForm select:focus, #paymentPreference input:focus, #paymentPreference select:focus {
+    outline: none;
+    border-color: #28a745;
+}
+
+/* Textarea styling (for reservation) */
+#reservationForm textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #3A3A3A;
+    color: #fff;
+    font-size: 1rem;
+    resize: vertical;
+}
+
+#reservationForm textarea:focus {
+    outline: none;
+    border-color: #28a745;
+}
+
+/* File input styling (for job application) */
+#jobApplicationForm input[type="file"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #3A3A3A;
+    color: #fff;
+    font-size: 1rem;
+}
+
+/* Checkbox and radio styling (for job application, survey, payment) */
+#jobApplicationForm input[type="checkbox"], #surveyForm input[type="checkbox"], #surveyForm input[type="radio"], #paymentPreference input[type="radio"] {
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+#jobApplicationForm input[type="checkbox"] + label, #surveyForm input[type="checkbox"] + label, #surveyForm input[type="radio"] + label, #paymentPreference input[type="radio"] + label {
+    display: inline;
+    font-weight: normal;
+}
+
+#jobApplicationForm a, #reservationForm a, #paymentPreference a {
+    color: #28a745;
+    text-decoration: none;
+}
+
+#jobApplicationForm a:hover, #reservationForm a:hover, #paymentPreference a:hover {
+    text-decoration: underline;
+}
+
+/* Radio group styling */
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Payment fields styling */
+.payment-fields {
+    padding-left: 20px;
+}
+
+/* Button styles */
+.signup-form button, #jobApplicationForm button, #reservationForm button, #surveyForm button, #paymentPreference button {
+    background: #28a745;
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-size: 1.1rem;
+}
+
+.signup-form button:hover, #jobApplicationForm button:hover, #reservationForm button:hover, #surveyForm button:hover, #paymentPreference button:hover {
+    background: #218838;
+}
+
+/* Dashboard link styles */
+.dashboard-link {
+    text-align: center;
+    margin-top: 15px;
+    color: #B3D4FF;
+}
+
+.dashboard-link a {
+    color: #28a745;
+    text-decoration: none;
+}
+
+.dashboard-link a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+    .container {
+        max-width: 90%;
+        margin: 20px auto;
+        padding: 20px;
+    }
+
+    .flashpage h1 {
+        font-size: 2rem;
+    }
+
+    .nav-link {
+        padding: 8px 12px;
+        font-size: 0.95rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1.2rem;
+    }
+
+    .intro {
+        font-size: 1rem;
+    }
+
+    .signup-form input, #jobApplicationForm input, #reservationForm input, #reservationForm select, #reservationForm textarea, #surveyForm input, #surveyForm select, #paymentPreference input, #paymentPreference select, .signup-form button, #jobApplicationForm button, #reservationForm button, #surveyForm button, #paymentPreference button {
+        padding: 0.6rem;
+        font-size: 0.95rem;
+    }
+}

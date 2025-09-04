@@ -1,38 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <title>Jop Appliction</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body>
-        <div class="JobApplication" class="container hidden">
-            <h2>Apply! Apply!</h2>
-            <div id="Application-error" class="error"></div>
-            <diV id="application-success" class="success"></diV>
-            <div class="fullname">
-                <label for="fullname">Enter your fullname</label>
-                <input type="text" class="Full-name" required>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Application</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Job Application</h2>
+        <div id="application-error" class="error" role="alert"></div>
+        <div id="application-success" class="success" role="alert"></div>
+        <form id="jobApplicationForm" action="/submit-application" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="fullName">Full Name *</label>
+                <input 
+                    type="text" 
+                    id="fullName" 
+                    name="fullName" 
+                    class="full-name" 
+                    placeholder="Enter your full name" 
+                    required 
+                    aria-describedby="application-error"
+                >
             </div>
-            <div class="region">
-                <label for="region">Enter your region</label>
-                <input type="text" class="regionname" required> 
+            <div class="form-group">
+                <label for="region">Region *</label>
+                <input 
+                    type="text" 
+                    id="region" 
+                    name="region" 
+                    class="region-name" 
+                    placeholder="Enter your region" 
+                    required 
+                    aria-describedby="application-error"
+                >
             </div>
-           <div class="dateofbirth">
-            <label for="dateofbirth">Enter your date of birth</label>
-            <input type="date" class="Birthdate" required>
-           </div>
-           <div class="resume">
-            <label for="resume">Attach your Resume/CV</label>
-            <input type="search" class="resume-cv">
-           </div>
-           <div  class="terms">
-            <input type="checkbox" id="terms&conditions" class="terms-conditions" required>
-            <label for="terms">I agree with terms and conditions</label>
-           </div>  
-
-        </div>
-
-    </body>
+            <div class="form-group">
+                <label for="dateOfBirth">Date of Birth *</label>
+                <input 
+                    type="date" 
+                    id="dateOfBirth" 
+                    name="dateOfBirth" 
+                    class="birth-date" 
+                    required 
+                    aria-describedby="application-error"
+                >
+            </div>
+            <div class="form-group">
+                <label for="resume">Attach Resume/CV * (PDF, DOC, DOCX, max 5MB)</label>
+                <input 
+                    type="file" 
+                    id="resume" 
+                    name="resume" 
+                    class="resume-cv" 
+                    accept=".pdf,.doc,.docx" 
+                    required 
+                    aria-describedby="application-error"
+                >
+            </div>
+            <div class="form-group">
+                <input 
+                    type="checkbox" 
+                    id="termsConditions" 
+                    name="termsConditions" 
+                    class="terms-conditions" 
+                    required 
+                    aria-describedby="application-error"
+                    aria-label="Agree to terms and conditions"
+                >
+                <label for="termsConditions">I agree to the <a href="/terms" target="_blank">terms and conditions</a> *</label>
+            </div>
+            <button type="submit">Submit Application</button>
+        </form>
+    </div>
+    <script src="js/script.js"></script>
+</body>
 </html>

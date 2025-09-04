@@ -1,8 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <title>Jop Appliction</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applicants Survey</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="survey container">
+        <h2>Applicant Survey Form</h2>
+        <div id="survey-error" class="error hidden"></div>
+        <div id="survey-success" class="success hidden"></div>
+        <form id="surveyForm">
+            <div class="form-group">
+                <label for="fullName">Full Name *</label>
+                <input type="text" id="fullName" name="fullName" class="survey-name" placeholder="Enter your Full Name" required>
+            </div>
+            <div class="form-group">
+                <label for="rolePreference">What type of role are you interested in? *</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="rolePreference" value="Full-Time" required> Full-Time</label>
+                    <label><input type="radio" name="rolePreference" value="Part-Time" required> Part-Time</label>
+                    <label><input type="radio" name="rolePreference" value="Contract" required> Contract</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="industry">Which industry would you prefer to work in? *</label>
+                <select id="industry" name="industry" required>
+                    <option value="">Select an option</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Healthcare">Healthcare</option>
+                    <option value="Market">Market</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Education">Education</option>
+                    <option value="Agriculture">Agriculture</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="experienceLevel">What is your experience level? *</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="experienceLevel" value="Entry-Level" required> Entry-Level (0-2 years)</label>
+                    <label><input type="radio" name="experienceLevel" value="Junior-Level" required> Junior-Level (3-5 years)</label>
+                    <label><input type="radio" name="experienceLevel" value="Senior-Level" required> Senior-Level (5+ years)</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="topSkill">What is your strongest skill? *</label>
+                <input type="text" id="topSkill" name="topSkill" class="top-skill" placeholder="e.g., Python" required>
+            </div>
+            <div class="form-group">
+                <label>What motivates you most in a job? (Select all that apply)</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="motivations[]" value="Salary"> Salary</label>
+                    <label><input type="checkbox" name="motivations[]" value="Work-Life Balance"> Work-Life Balance</label>
+                    <label><input type="checkbox" name="motivations[]" value="Career Growth"> Career Growth</label>
+                    <label><input type="checkbox" name="motivations[]" value="Company Culture"> Company Culture</label>
+                    <label><input type="checkbox" name="motivations[]" value="Social Impact"> Social Impact</label>
+                </div>
+            </div>
+            <button type="submit">Submit Survey</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
