@@ -1,27 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <title>Jop Appliction</title>
-        <link rel="stylesheet" href="CSS/login.css">
-    </head>
-    <body>
-         <!--login form-->
-         <div  class="container hidden">
-            <h2>Welcome Back!</h2>
-            <div id="login-error" class="error"></div>
-            <form id="LoginForm" class="login-form">
-                <label for="email">Email</label>
-                <input type="email" id="Login-Email" class="loginemail" placeholder="Enter email">
-                <label for="password">Password</label>
-                <input type="password" id="Login-Password" class="loginpassword" placeholder="Enter password">
-                <button type="submit">Login</button>
-                
-            </form>
-           
-
-        </div>
-
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="CSS/login.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Log In</h2>
+        <div id="login-error" class="error"></div>
+        <div id="login-success" class="success"></div>
+        <form id="loginForm" class="loginForm" action="/login" method="POST">
+            <label for="login-email">Email</label>
+            <input 
+                type="email" 
+                id="login-email" 
+                class="login-email" 
+                placeholder="Enter email" 
+                required
+            >
+            <label for="login-password">Password</label>
+            <input 
+                type="password" 
+                id="login-password" 
+                class="login-password" 
+                placeholder="Enter password" 
+                required
+            >
+            <button type="submit">Log In</button>
+        </form>
+        <p class="signup-link">Don't have an account? <a href="/signup.html">Sign Up</a></p>
+    </div>
+    <script src="script.js"></script>
+</body>
 </html>
