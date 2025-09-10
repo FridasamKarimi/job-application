@@ -1,224 +1,132 @@
-// Splash Page Logic
 document.addEventListener('DOMContentLoaded', () => {
-    const flashpage = document.getElementById('flashpage');
-    const skipButton = document.querySelector('.skip-button');
+    // Splash page logic (only for index.html)
+    if (window.location.pathname === '/index.html' || window.location.pathname === '/') {
+        const flashpage = document.getElementById('flashpage');
+        const container = document.querySelector('.container');
+        const skipButton = document.querySelector('.skip-button');
 
-    // Check if user is authenticated
-    const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
-
-    // Redirect after splash page
-    const redirectAfterSplash = () => {
-        if (flashpage) {
-            flashpage.classList.add('hidden');
+        // Check if user is authenticated
+        let isAuthenticated = false;
+        try {
+            isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+        } catch (e) {
+            console.error('Error accessing localStorage:', e);
+            const errorDiv = document.getElementById('nav-error') || document.createElement('div');
+            errorDiv.id = 'nav-error';
+            errorDiv.style.color = 'red';
+            errorDiv.style.display = 'block';
+            errorDiv.textContent = 'Storage error. Please enable local storage.';
+            document.querySelector('main').prepend(errorDiv);
         }
-        setTimeout(() => {
-            window.location.href = isAuthenticated ? '/application.html' : '/signup.html';
-        }, 1000);
-    };
 
-    // Auto-redirect after 2 seconds
-    setTimeout(redirectAfterSplash, 2000);
+        // If authenticated, skip splash page and show container
+        if (isAuthenticated) {
+            if (flashpage) {
+                flashpage.style.display = 'none';
+            }
+            if (container) {
+                container.style.display = 'block';
+            }
+            // Optionally update welcome message for logged-in user
+            const intro = document.querySelector('.intro');
+            if (intro) {
+                const currentUser = localStorage.getItem('currentUser') || 'User';
+                intro.textContent = `Welcome back, ${currentUser}! Explore your job opportunities!`;
+            }
+        } else {
+            // Show splash page for unauthenticated users
+            if (container) {
+                container.style.display = 'none';
+            }
 
-    // Skip button to redirect immediately
-    if (skipButton) {
-        skipButton.addEventListener('click', redirectAfterSplash);
+            const redirectAfterSplash = () => {
+                if (flashpage) {
+                    flashpage.classList.add('hidden');
+                }
+                setTimeout(() => {
+                    if (container) {
+                        container.style.display = 'block';
+                    }
+                    try {
+                        const users = JSON.parse(localStorage.getItem('users') || '[]');
+                        window.location.href = users.length > 0 ? '/login.html' : '/signup.html';
+                    } catch (e) {
+                        console.error('Error accessing localStorage for redirect:', e);
+                        window.location.href = '/signup.html';
+                    }
+                }, 1000);
+            };
+
+            setTimeout(redirectAfterSplash, 2000);
+
+            if (skipButton) {
+                skipButton.addEventListener('click', redirectAfterSplash);
+            }
+        }
     }
 
-    // Protect navigation links for authenticated pages
+    // Protect navigation links (runs on all pages with nav-menu)
     const protectedLinks = ['apply-link', 'survey-link', 'payment-link', 'reservation-link'];
     protectedLinks.forEach(linkClass => {
         const link = document.querySelector(`.${linkClass}`);
         if (link) {
             link.addEventListener('click', (e) => {
-                if (!isAuthenticated) {
+                try {
+                    const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+                    if (!isAuthenticated) {
+                        e.preventDefault();
+                        const errorDiv = document.getElementById('nav-error') || document.createElement('div');
+                        errorDiv.id = 'nav-error';
+                        errorDiv.style.color = 'red';
+                        errorDiv.style.display = 'block';
+                        errorDiv.setAttribute('aria-live', 'polite');
+                        errorDiv.textContent = 'Please log in to access this page.';
+                        document.querySelector('main').prepend(errorDiv);
+                        setTimeout(() => window.location.href = '/login.html', 2000);
+                    }
+                } catch (e) {
+                    console.error('Error accessing localStorage:', e);
                     e.preventDefault();
-                    alert('Please log in to access this page');
-                    window.location.href = '/login.html'; // Consistent path
+                    const errorDiv = document.getElementById('nav-error') || document.createElement('div');
+                    errorDiv.id = 'nav-error';
+                    errorDiv.style.color = 'red';
+                    errorDiv.style.display = 'block';
+                    errorDiv.textContent = 'Storage error. Please enable local storage.';
+                    document.querySelector('main').prepend(errorDiv);
                 }
             });
         }
     });
-});
 
-// Signup Form Validation
-document.getElementById('signupForm')?.addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    const email = document.getElementById('signup-email')?.value.trim();
-    const password = document.getElementById('signup-password')?.value;
-    const confirmPassword = document.getElementById('confirm-password')?.value;
-    const errorDiv = document.getElementById('signup-error');
-    const successDiv = document.getElementById('signup-success');
-    const submitButton = document.querySelector('#signupForm button[type="submit"]');
-
-    // Clear previous errors
-    if (errorDiv) {
-        errorDiv.style.display = 'none';
-        errorDiv.textContent = '';
-        errorDiv.setAttribute('aria-live', 'polite');
-    }
-
-    // Validation
-    if (!email || !password || !confirmPassword) {
-        if (errorDiv) {
-            errorDiv.textContent = 'Please fill in all required fields';
-            errorDiv.style.display = 'block';
-        }
-        return;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        if (errorDiv) {
-            errorDiv.textContent = 'Please enter a valid email address';
-            errorDiv.style.display = 'block';
-        }
-        return;
-    }
-
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    if (!passwordRegex.test(password)) {
-        if (errorDiv) {
-            errorDiv.textContent = 'Password must be 8+ characters with uppercase, lowercase, number, and special character';
-            errorDiv.style.display = 'block';
-        }
-        return;
-    }
-
-    if (password !== confirmPassword) {
-        if (errorDiv) {
-            errorDiv.textContent = 'Passwords do not match';
-            errorDiv.style.display = 'block';
-        }
-        return;
-    }
-
-    // Disable submit button to prevent multiple submissions
-    if (submitButton) {
-        submitButton.disabled = true;
-    }
-
+    // Update nav for authenticated users (hide Login/Sign Up, show Log Out)
     try {
-        // Check if email already exists in local storage
-        let existingUsers = [];
-        try {
-            existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
-        } catch (parseError) {
-            console.error('Error parsing users from localStorage:', parseError);
-        }
-
-        if (existingUsers.some(user => user.email === email)) {
-            if (errorDiv) {
-                errorDiv.textContent = 'Email already exists';
-                errorDiv.style.display = 'block';
+        const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+        if (isAuthenticated) {
+            const loginLink = document.querySelector('.login-link');
+            const signupLink = document.querySelector('.signup-link');
+            if (loginLink) loginLink.style.display = 'none';
+            if (signupLink) signupLink.style.display = 'none';
+            // Add Log Out link if not already present
+            const navMenu = document.querySelector('.nav-menu');
+            if (navMenu && !document.getElementById('logoutButton')) {
+                const logoutButton = document.createElement('button');
+                logoutButton.id = 'logoutButton';
+                logoutButton.textContent = 'Log Out';
+                logoutButton.style.margin = '0 15px';
+                logoutButton.style.background = 'none';
+                logoutButton.style.border = 'none';
+                logoutButton.style.color = 'white';
+                logoutButton.style.fontSize = '16px';
+                logoutButton.style.cursor = 'pointer';
+                logoutButton.addEventListener('click', () => {
+                    localStorage.removeItem('isAuthenticated');
+                    localStorage.removeItem('currentUser');
+                    window.location.href = '/login.html';
+                });
+                navMenu.appendChild(logoutButton);
             }
-            if (submitButton) submitButton.disabled = false;
-            return;
         }
-
-        // Add new user
-        const newUser = { email, password }; // Note: In production, hash the password
-        existingUsers.push(newUser);
-        localStorage.setItem('users', JSON.stringify(existingUsers));
-        // Do NOT set isAuthenticated here; user must log in
-
-        // Show success message and redirect
-        if (successDiv) {
-            successDiv.textContent = 'Account created successfully! Redirecting to login...';
-            successDiv.style.display = 'block';
-        }
-        setTimeout(() => {
-            window.location.href = '/login.html';
-        }, 1500); // Reduced delay for better UX
-    } catch (error) {
-        console.error('Signup error:', error);
-        if (errorDiv) {
-            errorDiv.textContent = 'An error occurred. Please try again.';
-            errorDiv.style.display = 'block';
-        }
-    } finally {
-        if (submitButton) submitButton.disabled = false;
-    }
-});
-
-// Login Form Validation
-document.getElementById('loginForm')?.addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    const email = document.getElementById('login-email')?.value.trim();
-    const password = document.getElementById('login-password')?.value;
-    const errorDiv = document.getElementById('login-error');
-    const successDiv = document.getElementById('login-success');
-    const submitButton = document.querySelector('#loginForm button[type="submit"]');
-
-    // Clear previous errors
-    if (errorDiv) {
-        errorDiv.style.display = 'none';
-        errorDiv.textContent = '';
-        errorDiv.setAttribute('aria-live', 'polite');
-    }
-
-    // Validation
-    if (!email || !password) {
-        if (errorDiv) {
-            errorDiv.textContent = 'Please fill in all required fields';
-            errorDiv.style.display = 'block';
-        }
-        return;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        if (errorDiv) {
-            errorDiv.textContent = 'Please enter a valid email address';
-            errorDiv.style.display = 'block';
-        }
-        return;
-    }
-
-    // Disable submit button to prevent multiple submissions
-    if (submitButton) {
-        submitButton.disabled = true;
-    }
-
-    try {
-        // Check credentials against stored users
-        let users = [];
-        try {
-            users = JSON.parse(localStorage.getItem('users') || '[]');
-        } catch (parseError) {
-            console.error('Error parsing users from localStorage:', parseError);
-        }
-
-        const user = users.find(u => u.email === email && u.password === password);
-        if (!user) {
-            if (errorDiv) {
-                errorDiv.textContent = 'Invalid email or password';
-                errorDiv.style.display = 'block';
-            }
-            if (submitButton) submitButton.disabled = false;
-            return;
-        }
-
-        // Set authentication flag and current user
-        localStorage.setItem('isAuthenticated', 'true');
-        localStorage.setItem('currentUser', email);
-
-        // Show success message and redirect
-        if (successDiv) {
-            successDiv.textContent = 'Login successful! Redirecting...';
-            successDiv.style.display = 'block';
-        }
-        setTimeout(() => {
-            window.location.href = '/application.html';
-        }, 1500); // Reduced delay for better UX
-    } catch (error) {
-        console.error('Login error:', error);
-        if (errorDiv) {
-            errorDiv.textContent = 'An error occurred. Please try again.';
-            errorDiv.style.display = 'block';
-        }
-    } finally {
-        if (submitButton) submitButton.disabled = false;
+    } catch (e) {
+        console.error('Error accessing localStorage for nav update:', e);
     }
 });
